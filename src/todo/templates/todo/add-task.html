@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Le template d'ajout des taches
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'todo/css/mainTodo.css' %}">
+{% endblock %}
+
+{% block header %}
+  <div class="header">
+    <span class="logo">baloo.</span>
+    <a href="{% url 'todo:index' %}">Accueil</a>
+  </div>
+{% endblock %}
+
+{% block main %}
+  <div class="todoForm">
+    <div>
+      <h1>Ajouter une tâche</h1>
+      <form action="" method="POST" novalidate>{% csrf_token %}
+        {% for field in form %}
+          <p>
+            {{ field.label_tag }} {{ field }}
+          </p>
+          {% if field.errors %}
+            <small>{{ field.errors|striptags}}</small>
+          {% endif %}
+        {% endfor %}
+        <input type="submit" value="Ajouter" class="ajouter button">
+      </form>
+    </div>
+  </div>
+{% endblock %}

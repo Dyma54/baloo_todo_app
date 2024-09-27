@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Suppression de l'article {{ task.title }}
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'todo/css/mainTodo.css' %}">
+{% endblock %}
+
+{% block header %}
+  <h1>Etes vous sûr ?</h1>
+{% endblock %}
+
+{% block main %}
+  <div class="removeForm">
+    <form method="POST" novalidate>{% csrf_token %}
+      <p>Voulez-vous vraiment supprimer la tâche avec le titre : <b>{{ task.title }}</b></p>
+      <a href="{% url 'todo:index' %}">Non, je veux retourner à la page précédente</a>
+      <input type="submit" value="Oui, je veux supprimer" class='dropTaskButton'>
+    </form>
+  </div>
+{% endblock %}

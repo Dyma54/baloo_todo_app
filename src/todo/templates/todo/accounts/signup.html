@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="stylesheet" href="{% static 'todo/css/mainTodo.css' %}">
+{% endblock %}
+
+{% block title %}
+  Création de compte baloo.
+{% endblock %}
+
+{% block header %}
+  <div class="header">
+    <span class="logo">baloo.</span>
+    <a href="{% url 'todo:index' %}">Accueil</a>
+  </div>
+{% endblock %}
+
+{% block main %}
+  <div class="signupForm">
+    <div>
+      <h1 class="signupTitle">Création de compte</h1>
+      <small>Ces informations sont dans le but de mieux personnaliser l'application pour vous.</small>
+      <form method="POST" novalidate class="form1">{% csrf_token %}
+      {% for field in form %}
+          <p>
+            {{ field.label_tag }} {{ field }}
+          </p>
+          {% if field.errors %}
+            <small>{{ field.errors|striptags}}</small>
+          {% endif %}
+      {% endfor %}
+      <input type="submit" value="Créer" class="button"/>
+      <p>Avez-vous déjà un compte ? <a href="{%url 'login' %}">Se connecter</a></p>
+      </form>
+      <p class="termsOfUse">"En vous inscrivant, vous acceptez nos <em>Conditions d'utilisation</em> et notre <em>Politique de confidentialité</em>. Veuillez les lire attentivement avant de continuer."</p>
+    </div>
+  </div>
+{% endblock %}
